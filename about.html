@@ -86,7 +86,7 @@
        <ul>
          <li ng-repeat="project in projects">
            <small><em>Object (changes type based on value)</em></small>
-           <progressbar class="progress-striped active" value="dynamic" type="{{project.type}}"><i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
+           <progressbar class="progress-striped active" value="project.value" type="{{project.type}}"></progressbar>
            <p>{{project.amount}}</p>
            <p>{{project.location}}</p>
            <p>{{project.treatment_description}}</p>
@@ -111,7 +111,8 @@
 
      <!-- Angular js -->
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
      <!-- Custom Theme JavaScript -->
      <script src="js/main.js"></script>
      <script src="js/creative.js"></script>

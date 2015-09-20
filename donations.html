@@ -53,6 +53,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
     <script src="bower_components/angularparse/angularparse.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -88,7 +89,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m6" ng-repeat="project in projects">
-                <div class="card large">
+                <div class="card large" id="{{project.id}}">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="landing-page activator" src="{{project.imgLocation}}">
                         <span class="card-title">
@@ -112,11 +113,33 @@
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">{{project.doctorName}}<i class="material-icons right">close</i></span>
                         <p><br>{{project.treatment_description}}</p>
-                    </div>
+                        <div class="container">
+<!--
+                          <div class="row" id="projectDetails" style="padding-left: 30px">
+                              <h2>{{project.focus}}</h2>
+                              ${{project.amountNeeded - project.amountSofar}} more needed
+                          </div>
+
+                          <div class="row" id="location">
+                              <span class="card-title">
+                                  <p>{{project.location}}</p>
+                              </span>
+                          </div> -->
+
+                          <div class="card-content" style="height: 300px; margin-top: -15px">
+                              <uib-progress style="height: 18px;">
+                                  <uib-bar ng-repeat="bar in project.breakdown track by $index"value="bar.value" type="{{bar.type}}">
+                                      <span tooltip="hh" ng-hide="bar.value < 5">{{bar.value}}%</span>
+                                  </uib-bar>
+                              </uib-progress>
+                              <div id="pie_chart" style="width: 300px; height: 300px; margin-left: 35px; font-size:0.6em;">
+
+                              </div>
+                          </div>
+                          <!-- <h3>Breakdown</h3> -->
+                      </div>
+                  </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -133,7 +156,11 @@
     <script src="js/wow.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 
 </html>

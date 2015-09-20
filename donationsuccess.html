@@ -99,41 +99,6 @@
             </div>
         </div>
     </div>
-    <div class="container">
-      <div class="row" ng-view="">
-        <div class="container" ng-app="d2d" ng-controller="mainCtrl">
-            <div class="card">
-                <div class="row" id="projectDetails" style="padding-left: 30px">
-                    <h2>{{projects[0].focus}}</h2>
-                    ${{projects[0].amountNeeded - projects[0].amountSofar}} more needed
-                </div>
-
-                <div class="row" id="location">
-                    <span class="card-title">
-                        <p>{{projects[0].location}}</p>
-                    </span>
-                </div>
-
-                <div class="card-content">
-                    <uib-progress style="height: 18px;">
-                        <uib-bar ng-repeat="bar in projects[0].breakdown track by $index"value="bar.value" type="{{bar.type}}">
-                            <span tooltip="hh" ng-hide="bar.value < 5">{{bar.value}}%</span>
-                        </uib-bar>
-                    </uib-progress>
-                </div>
-                <h3>Breakdown</h3>
-                <div id="pie_chart" style="width: 500px; height: 500px; margin: 0 auto;">
-
-                </div>
-            </div>
-        </div>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      </div>
-    </div>
 
 </div><!-- #page -->
 

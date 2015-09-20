@@ -1,8 +1,24 @@
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<script src="js/jquery.parse.js"></script>
+
+<!-- <div class="alert alert-danger" id="show_danger" style="display: none">
+    <a href="#" class="close" onclick="$('#show_danger').hide()" aria-label="close">&times;</a>
+  <strong>Invalid Email</strong>
+</div> -->
 <form novalidate role="form">
       <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
       <div class="form-group">
+          <label for="InputMessage">Email</label>
           <div class="input-group">
-              <input type="email" ng-modal="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Enter Email" required>
+              <input type="email" ng-modal="email" class="form-control" id="email" name="InputEmail" placeholder="Enter Email" required>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="InputMessage">Amount</label>
+          <div class="input-group">
+              <input type="number" min="1" name="InputMessage" id="amount" ng-model="amount" class="form-control" rows="5" required></input>
               <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
           </div>
       </div>
@@ -26,3 +42,37 @@
         </div>
       </div>
 </form>
+
+<script>
+$(document).ready(function(){
+    $("#submit").click(function(e) {
+        e.preventDefault();
+      var current_email = $("#email").val();
+      var current_amount = Number($("#amount").val());  
+      var isValid = true;
+      // var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
+      // if(!pattern.test(email)){
+      //   $("#show_danger").show("fast");
+      //   isValid = false;
+      // }
+      if(isValid) {
+        $.parse.init({
+            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here 
+            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here    
+        });
+        console.log(email);
+        console.log(amount);
+        $.parse.get("Donator", function(json) {
+            results = json.results;
+            var nextDonatorId = results[results.length - 1].donatorId;
+            console.log(nextDonatorId+1);
+            $.parse.post('Donator', {
+              donationId : 1,
+              donatorId : (nextDonatorId + 1),
+              amount : current_amount,
+              email : current_email,
+              isUser : false });
+          });
+      }
+})});
+</script>

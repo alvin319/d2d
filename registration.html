@@ -8,8 +8,9 @@
 <script src="js/jquery.js"></script>
 
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Please sign up for Bootsnipp </h3>
+    <div class="alert alert-danger" id="show_danger" style="display: none">
+        <a href="#" class="close" onclick="$('#show_danger').hide()" aria-label="close">&times;</a>
+      <strong>Invalid Email Or Password Mismatch</strong>
     </div>
     <div class="panel-body">
         <form role="form">
@@ -58,15 +59,14 @@ $(document).ready(function(){
       var before_password = $("#password").val();
       var after_password = $("#password_confirmation").val();
       if(before_password !== after_password) {
-        error = "The password doesn't match. \n"
-        alert(error);
+        $("#show_danger").show("fast");
         isValid = false;
       }
       var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
       var fname = $("#first_name").val();
       var lname = $("#last_name").val();
       if(!pattern.test(email)){
-        alert("Please enter a valid email.\n");
+        $("#show_danger").show("fast");
         isValid = false;
       }
       if(isValid) {
@@ -75,8 +75,6 @@ $(document).ready(function(){
         console.log(fname);
         console.log(lname);
 
-      } else {
-        alert("Failed. \n");
       }
 })});
 </script>

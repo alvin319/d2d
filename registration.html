@@ -6,14 +6,11 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-    
+
 <div class="container">
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please sign up for Bootsnipp </h3>
-                </div>
                 <div class="panel-body">
                     <form role="form">
                         <div class="row">
@@ -46,10 +43,42 @@
                             </div>
                         </div>
                         
-                        <input type="submit" value="Register" class="btn btn-info btn-block">
+                        <input type="submit" id="register_submit" value="Register" class="btn btn-info btn-block">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $("#register_submit").click(function(e) {
+        e.preventDefault();
+      var email = $("#email").val();
+      var isValid = true;    
+      var before_password = $("#password").val();
+      var after_password = $("#password_confirmation").val();
+      if(before_password !== after_password) {
+        error = "The password doesn't match. \n"
+        alert(error);
+        isValid = false;
+      }
+      var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
+      var fname = $("#first_name").val();
+      var lname = $("#last_name").val();
+      if(!pattern.test(email)){
+        alert("Please enter a valid email.\n");
+        isValid = false;
+      }
+      if(isValid) {
+        console.log(email);
+        console.log(password);
+        console.log(fname);
+        console.log(lname);
+
+      } else {
+        alert("Failed. \n");
+      }
+})});
+</script>

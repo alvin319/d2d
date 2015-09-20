@@ -24,6 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link rel="stylesheet" href="css/donation.css" type="text/css">
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -85,7 +86,7 @@
             <div class="col s12 m6" ng-repeat="project in projects">
                 <div class="card large">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="{{project.imgLocation}}">
+                        <img class="landing-page activator" src="{{project.imgLocation}}">
                         <span class="card-title">
                           ${{project.amountNeeded-project.amountSofar}} more needed
                           <p>for {{project.focus}}</p>

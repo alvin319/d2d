@@ -27,6 +27,7 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -46,6 +47,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+    <script src="bower_components/angularparse/angularparse.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -85,7 +87,7 @@
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="{{project.imgLocation}}">
                         <span class="card-title">
-                          ${{project.amountNeeded}} more needed
+                          ${{project.amountNeeded-project.amountSofar}} more needed
                           <p>for {{project.focus}}</p>
                         <p>{{project.location}}</p>
                         <progressbar class="progress-striped active" value="project.value" type="{{project.type}}" style="height: 15px;"></progressbar>
@@ -116,8 +118,7 @@
 
 
 </div><!-- #page -->
-
-
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

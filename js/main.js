@@ -124,13 +124,8 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
       for(var i = 0; i < results.length; i++) {
         for(project in $scope.projects) {
           if(project == (results[i].attributes.donationId - 1)) {
-            console.log("id: " + project);
-            console.log("before sofar: " + $scope.projects[project].amountSofar);
-            console.log("before needed: " + $scope.projects[project].amountNeeded);
             $scope.projects[project].amountSofar = results[i].attributes.currentAmount;
             $scope.projects[project].amountNeeded = results[i].attributes.expectedAmount;
-            console.log("after sofar: " + $scope.projects[project].amountSofar);
-            console.log("after needed: " + $scope.projects[project].amountNeeded);
           }
         }
       }

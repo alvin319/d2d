@@ -62,7 +62,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
 
   $scope.getCurrentAmount = function() {
     var query = parseQuery.new('Donation');
-    
+
     parseQuery.find(query)
     .then(function(results) {
       for(var i = 0; i < results.length; i++) {

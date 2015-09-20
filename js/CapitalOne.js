@@ -16,7 +16,7 @@ $(function() {
 		$.ajax({
 			url: URL,
 			type: 'POST',
-			data: postData,
+			data: JSON.stringify(postData),
 			dataType: 'json',
 			contentType: "application/json; charset=utf-8",
 			success : function (data, textStatus) {
@@ -31,34 +31,44 @@ $(function() {
 		});
 	}
 
-	function updateTable(id, tableID) {
+	function getBalance(id, balanceID) {
+		$.ajax({
+			url: formatURL('accounts/' + id),
+			method : 'GET',
+			dataType : 'json',
+			success : function (data, textStatus) {
+				$('#' + balanceID).text('$' + data.balance);
+			}
+		})
+	}
+
+	function updateTable(id, tableID, balanceID) {
+		getBalance(id, balanceID);
 		$.ajax({
 			url : formatURL('accounts/' + id + '/transfers'),
 			method : 'GET',
 			dataType : 'json',
 			success : function (data, textStatus) {
 				$.each(data, function(index, transaction) {
-					if ($('#' + transaction._id).length === 0) {
-						var numTransactions = index + 1;
-						$('#' + tableID + ' tr:last').after('<tr><td>Transaction</td><td>' + numTransactions + '</td></tr>');
-						$.each(transaction, function(key, value) {
-							if (key.indexOf('_id') < 0) {
-								$('#' + tableID + ' tr:last').after('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-							}
-						});
+					if ($('#' + id + transaction._id).length === 0) {
+						var amount = transaction.amount;
+						if (id === transaction.payer_id) {
+							amount *= -1;
+						}
+						$('#' + tableID + ' tr:last').after('<tr id=' + id + transaction._id + '><td>' + transaction.description + '</td><td>' + amount + '</td></tr>');
 					}
 				});
 			}
 		});
 	}
 
-	updateTable(config.charityAccountID, 'charityTransactionTable');
-	updateTable(config.donorAccountID, 'donorTransactionTable');
-	$("#donateButton").click(function() {
-		createTransaction(5);
-	});
+	updateTable(config.charityAccountID, 'charityTransactionTable', 'charityBalance');
+	updateTable(config.donorAccountID, 'donorTransactionTable', 'donorBalance');
 	$("#refreshButton").click(function() {
 		updateTable(config.charityAccountID, 'charityTransactionTable');
 		updateTable(config.donorAccountID, 'donorTransactionTable');
+	});
+	$("#donateButton").click(function() {
+		createTransaction(5);
 	});
 });

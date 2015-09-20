@@ -1,6 +1,6 @@
 var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap']);
 
-dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $location, $http){
+dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($scope, $location, $http, $modal){
   $scope.projects = [{
     'amountNeeded': 290,
     'amountSofar': 0,
@@ -65,4 +65,15 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
     }
   };
   $scope.updateProgressBar();
+  $scope.open = function () {
+    console.log("work");
+  var modalInstance = $modal.open({
+    animation: $scope.animationsEnabled,
+    templateUrl: 'registration.html',
+    resolve: {
+      items: function () {
+        return $scope.items;
+      }
+    }
+  })};
 }]);

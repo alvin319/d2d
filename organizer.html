@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Donation - D2D</title>
+    <title>Organizer - D2D</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -24,10 +24,11 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
-    <link rel="stylesheet" href="css/submitDonation.css" type="text/css">
+    <!-- <link rel="stylesheet" href="css/organizer.css" type="text/css"> -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -43,9 +44,14 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- d3 js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
     <!-- Angular js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+    <script src="bower_components/angularparse/angularparse.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -78,34 +84,34 @@
         <!-- /.container-fluid -->
     </nav>
     <br><br><br><br>
+    <div class="container" ng-app="d2d" ng-controller="mainCtrl">
+        <div class="card">
+            <div class="row" id="projectDetails" style="padding-left: 30px">
+                <h2>{{projects[0].focus}}</h2>
+                ${{projects[0].amountNeeded}} more needed
+            </div>
 
-    <div class="container">
-        <div class="row">
-            <a class="col s3" href="https://cash.me/$fear" target="_blank"><img src="img/square.png" width=200 height=200></img></a>
-            <a class="col s3" href="https://www.google.com"><img src="img/capitalOne.png" width=200 height=200></img></a>
+            <div class="row" id="location">
+                <span class="card-title">
+                    <p>{{projects[0].location}}</p>
+                </span>
+            </div> 
+
+            <div class="card-content">
+                <uib-progress style="height: 18px;">
+                    <uib-bar ng-repeat="bar in projects[0].breakdown track by $index"value="bar.value" type="{{bar.type}}">
+                        <span tooltip="hh" ng-hide="bar.value < 5">{{bar.value}}%</span>
+                    </uib-bar>
+                </uib-progress>
+            </div>
+            <h3>Breakdown</h3>
+            <div id="pie_chart" style="width: 500px; height: 500px; margin: 0 auto;">
+
+            </div>
         </div>
-
-        <form id="register-form" style="display:none;">
-            <div class="modal-body">
-                <div id="div-register-msg">
-                    <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
-                    <span id="text-register-msg">Register an account.</span>
-                </div>
-                <input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-                <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
-                <input id="register_password" class="form-control" type="password" placeholder="Password" required>
-            </div>
-            <div class="modal-footer">
-                <button id="donate_btn" type="button" class="btn btn-link">Donate</button>
-            </div>
-        </form>
-
     </div>
-
-
-
-
 </div><!-- #page -->
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -114,7 +120,6 @@
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/jquery.fittext.js"></script>
     <script src="js/wow.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
 

@@ -24,6 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link rel="stylesheet" href="css/donation.css" type="text/css">
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -42,6 +43,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- d3 js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
     <!-- Angular js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
@@ -86,7 +90,7 @@
             <div class="col s12 m6" ng-repeat="project in projects">
                 <div class="card large">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="{{project.imgLocation}}">
+                        <img class="landing-page activator" src="{{project.imgLocation}}">
                         <span class="card-title">
                           ${{project.amountNeeded-project.amountSofar}} more needed
                           <p>for {{project.focus}}</p>

@@ -62,21 +62,72 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
   }
   ];
 
+    function makePieChart (project) {
+        var breakdown = project.breakdown;
+        var data = [];
+        breakdown.forEach(function(element, index, array) {
+            data.push({'label': element.type, 'value': element.value});
+        });
+
+        var width = 400, height = 400, r = height / 2;
+        var color = d3.scale.category20c();
+
+        var vis = d3.select('#pie_chart')
+                    .append('svg:svg')
+                    .data([data])
+                        .attr('width', width)
+                        .attr('height', height)
+                    .append('svg:g')
+                        .attr('transform', 'translate(' + 200 + ',' + 200 +')');
+
+        var arc = d3.svg.arc().outerRadius(r);
+        var pie = d3.layout.pie().value(function(d) {
+            return d.value;
+        });
+
+        var arcs = vis.selectAll('g.slice')
+                        .data(pie)
+                        .enter()
+                            .append('svg:g')
+                                .attr('class', 'slice');
+
+        arcs.append('svg:path')
+            .attr('fill', function(d, i) {
+                return color(i);
+            })
+            .attr('d', arc);
+
+        arcs.append('svg:text')
+            .attr('transform', function(d) {
+                d.innerRadius = 0;
+                d.outerRadius = d;
+                return "translate(" + arc.centroid(d) + ")";
+            })
+            .attr('text-anchor', 'middle')
+            .text(function(d, i) {
+                return data[i].label;
+            });
+    }
+    makePieChart($scope.projects[0]);
+
+  $scope.updateProgressBar = function() {
+    var types = ['danger','warning','info','success'];
+    for (project in $scope.projects) {
+      project.value = Math.floor(project.amountSofar / project.amountNeeded * 100);
+      project.type = types[Math.floor(project.value/25)];
+    }
+  };
+  $scope.updateProgressBar();
+
   $scope.getCurrentAmount = function() {
     var query = parseQuery.new('Donation');
-
     parseQuery.find(query)
     .then(function(results) {
       for(var i = 0; i < results.length; i++) {
         for(project in $scope.projects) {
           if(project == (results[i].attributes.donationId - 1)) {
-            console.log("id: " + project);
-            console.log("before sofar: " + $scope.projects[project].amountSofar);
-            console.log("before needed: " + $scope.projects[project].amountNeeded);
             $scope.projects[project].amountSofar = results[i].attributes.currentAmount;
             $scope.projects[project].amountNeeded = results[i].attributes.expectedAmount;
-            console.log("after sofar: " + $scope.projects[project].amountSofar);
-            console.log("after needed: " + $scope.projects[project].amountNeeded);
           }
         }
       }

@@ -207,4 +207,4 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
     }
   };
   $timeout($scope.updateProgressBar, 300);
-}])
+}]);

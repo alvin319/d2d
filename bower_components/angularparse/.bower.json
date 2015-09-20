@@ -28,7 +28,6 @@
     "commit": "77ef2a54dda0713ffc00780c1818f68706e43a5e"
   },
   "_source": "git://github.com/felipesabino/angular-parse.git",
-  "_target": "~0.2.0",
-  "_originalSource": "angularparse",
-  "_direct": true
+  "_target": "0.2.0",
+  "_originalSource": "angularparse"
 }

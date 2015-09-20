@@ -3,6 +3,7 @@ Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNP
 
 dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
   $scope.id = $routeParams.id;
+  console.log($scope.id);
   $scope.projects = [{
     'donationId': 1,
     'amountNeeded': 150,
@@ -26,7 +27,8 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
     'cashtag': 'fear',
     'type': 'success',
     'value': 40,
-    'breakdown_txt': '71%: Essential medical and logistical supplies including e.g. soap, stationery (counseling cards and job aids), a thermometer, respiratory timer, water jugs and a backpack. 29%: Critical medication including medicines to treat diarrhea, malaria, pneumonia, malnutrition and care for pregnant mothers.'
+    'breakdown_txt': '71%: Essential medical and logistical supplies including e.g. soap, stationery (counseling cards and job aids), a thermometer, respiratory timer, water jugs and a backpack. 29%: Critical medication including medicines to treat diarrhea, malaria, pneumonia, malnutrition and care for pregnant mothers.',
+    'id': 'first'
   },{
     'donationId': 2,
     'amountNeeded': 1,
@@ -40,7 +42,8 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
     'cashtag': 'fear',
     'type': 'success',
     'value': 50,
-    'breakdown_txt':'Birth Attendant Training - 47%, Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
+    'breakdown_txt':'Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
+    'id': 'second',
     'breakdown': [{
         'value': 47,
         'type': 'info'
@@ -61,23 +64,24 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
   }
   ];
 
-    function makePieChart (project) {
+  function makePieChart (project) {
         var breakdown = project.breakdown;
         var data = [];
         breakdown.forEach(function(element, index, array) {
             data.push({'label': element.type, 'value': element.value});
         });
 
-        var width = 400, height = 400, r = height / 2;
+        var width = 175, height = 175, r = height / 2;
         var color = d3.scale.category20c();
 
-        var vis = d3.select('#pie_chart')
+        var elementId = '#' + project.id + ' #pie_chart';
+        var vis = d3.select(elementId)
                     .append('svg:svg')
                     .data([data])
                         .attr('width', width)
                         .attr('height', height)
                     .append('svg:g')
-                        .attr('transform', 'translate(' + 200 + ',' + 200 +')');
+                        .attr('transform', 'translate(' + r + ',' + r +')');
 
         var arc = d3.svg.arc().outerRadius(r);
         var pie = d3.layout.pie().value(function(d) {
@@ -107,7 +111,11 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                 return data[i].label;
             });
     }
-    makePieChart($scope.projects[0]);
+    $(function() {
+  for (proj in $scope.projects) {
+    makePieChart($scope.projects[proj]);
+  }
+});
 
   $scope.updateProgressBar = function() {
     var types = ['danger','warning','info','success'];
@@ -150,7 +158,23 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                    // $location.url('./donations/'+ dId);
                    $modal.open({
                      // templateUrl: 'submitDonation.html',
-                       templateUrl: 'donate_template.html'
+                       templateUrl: 'donate_template.html',
+                       backdrop: true,
+                       windowClass: 'modal',
+                       controller: function ($scope, $modalInstance, $log, $http) {
+                          $scope.cvc = '';
+                          $scope.cardNumber = '';
+                          $scope.Expiry = '';
+                          $scope.submit = function () {
+                             $http.post({
+                               'cvc':'asdf'
+                             })
+                             $modalInstance.dismiss('cancel');
+                          }
+                          $scope.cancel = function () {
+                             $modalInstance.dismiss('cancel');
+                          };
+                       }
                    });
                };
              // $scope.cancel = function () {
@@ -163,6 +187,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
 
 
   $scope.open = function () {
+    console.log("work");
   var modalInstance = $modal.open({
     animation: $scope.animationsEnabled,
     templateUrl: 'registration.html',

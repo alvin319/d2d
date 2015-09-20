@@ -75,13 +75,23 @@ $(document).ready(function(){
             app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here 
             rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here    
         });
-        $.parse.post('User', { 
-            firstName : fname, 
-            lastName : lname, 
-            emailAddress : email, 
-            password : after_password }, function(json){
-            console.log(json);
-        });
-      }
+
+        $.parse.get("Donator", function(json) {
+            results = json.results;
+            var update_objectId;
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].email === email) {
+                    update_objectId = results[i].objectId;
+                }
+            }
+            $.parse.put(('Donator/'+update_objectId), { 
+                firstName : fname, 
+                lastName : lname,
+                isUser : true,
+                password : after_password
+                });
+            });
+        }
+
 })});
 </script>

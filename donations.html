@@ -42,6 +42,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Angular js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="js/main.js"></script>
+
 </head>
 
 <body id="page-top" style="background-color:lightgrey">
@@ -73,13 +77,31 @@
     </nav>
     <br><br><br><br>
 
-    <div class="container">
+
+
+    <div class="container" ng-app="d2d" ng-controller="mainCtrl">
+<!--         <ul>
+         <li ng-repeat="project in projects">
+           <small><em>Object (changes type based on value)</em></small>
+           <progressbar class="progress-striped active" value="dynamic" type="{{project.type}}"><i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
+           <p>{{project.amount}}</p>
+           <p>{{project.location}}</p>
+           <p>{{project.treatment_description}}</p>
+           <p>{{project.focus}}</p>
+           <p>{{project.breakdown}}</p>
+           <p></p>
+           <a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash!</a>
+         </li>
+       </ul> -->
         <div class="row">
-            <div class="col s12 m6">
+            <div class="col s12 m6" ng-repeat="project in projects">
                 <div class="card large">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="img/padina-screen.jpg">
-                        <span class="card-title">Doctor Name</span>
+                        <span class="card-title">
+                        {{project.amount}}
+                        <p>{{project.location}}</p>
+                        </span>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
@@ -87,23 +109,7 @@
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Doctor Name<i class="material-icons right">close</i></span>
-                        <p>Donation Description</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m6">
-                <div class="card large">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/padina-screen.jpg">
-                        <span class="card-title">Doctor Name</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
-                        <p><a href="#">Donation Link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Doctor Name<i class="material-icons right">close</i></span>
-                        <p>Donation Description</p>
+                        <p><br>{{project.treatment_description}}</p>
                     </div>
                 </div>
             </div>

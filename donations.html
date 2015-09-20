@@ -57,7 +57,7 @@
 
 </head>
 
-<body id="page-top" style="background-color:lightgrey">
+<body id="page-top" style="background-color:lightgrey" ng-app="d2d" ng-controller="mainCtrl">
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -85,7 +85,7 @@
         <!-- /.container-fluid -->
     </nav>
     <br><br><br><br>
-    <div class="container" ng-app="d2d" ng-controller="mainCtrl">
+    <div class="container">
         <div class="row">
             <div class="col s12 m6" ng-repeat="project in projects">
                 <div class="card large">
@@ -107,7 +107,7 @@
                           </uib-bar>
                         </uib-progress>
                         <p><a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash</a></p>
-                        <p><button ng-click="openDonate(project.donationId)">Donate</button></p>
+                        <p><a ng-href="./donation/{{project.donationId}}" >Donate</a></p>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">{{project.doctorName}}<i class="material-icons right">close</i></span>

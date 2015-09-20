@@ -3,7 +3,6 @@ Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNP
 
 dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
   $scope.id = $routeParams.id;
-  console.log($scope.id);
   $scope.projects = [{
     'donationId': 1,
     'amountNeeded': 150,

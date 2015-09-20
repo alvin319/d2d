@@ -1,24 +1,32 @@
 $(function() {
+
 	var config = capitalOneConfig;
 	function formatURL(path) {
-		return 'api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
+		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
 	}
-	function createTransaction(amount) {
+	function createTransaction(donation) {
 		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
+		var postData = {
+			medium: 'balance',
+			payee_id : config.charityAccountID,
+			// transaction_date : new Date().toDateString(),
+			description : "Donation to fund X's surgery",
+			amount : donation
+		};
 		$.ajax({
 			url: URL,
-			method: 'POST',
-			data: {
-				medium: 'balance',
-				payee_id : config.charityAccountID,
-				amount : amount,
-				transaction_date : new Date().toDateString(),
-				description : "Donation to fund X's surgery"
-			},
+			type: 'POST',
+			data: postData,
 			dataType: 'json',
+			contentType: "application/json; charset=utf-8",
 			success : function (data, textStatus) {
 				console.log(data);
 				console.log(textStatus);
+			},
+			error : function (xhr, ajaxOptions, throwError) {
+				console.log(xhr);
+				console.log(ajaxOptions);
+				console.log(throwError);
 			}
 		});
 	}
@@ -29,25 +37,17 @@ $(function() {
 			method : 'GET',
 			dataType : 'json',
 			success : function (data, textStatus) {
-				if ($('#' + data._id).length === 0) {
-					var $transactions = $('#' + tableID).children('tr:contains("Transactions")');
-					var max = 0;
-					$.each($transactions, function(index, element) {
-						var num = parseInt(element.next().val());
-						if (isNaN(num)) {
-							alert('failed: ' + element);
-						} else if (num > max) {
-							max = num;
-						}
-					});
-					var numTransactions = max + 1;
-					$('#' + tableID + ' tr:last').after('<tr><td>Transaction</td><td>' + numTransactions + '</td></tr>');
-					$.each(data, function(key, value) {
-						if (key.indexOf('_id') >= 0) {
-							$('#' + tableID + 'tr:last').after('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-						}
-					});
-				}
+				$.each(data, function(index, transaction) {
+					if ($('#' + transaction._id).length === 0) {
+						var numTransactions = index + 1;
+						$('#' + tableID + ' tr:last').after('<tr><td>Transaction</td><td>' + numTransactions + '</td></tr>');
+						$.each(transaction, function(key, value) {
+							if (key.indexOf('_id') < 0) {
+								$('#' + tableID + ' tr:last').after('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
+							}
+						});
+					}
+				});
 			}
 		});
 	}
@@ -56,12 +56,9 @@ $(function() {
 	updateTable(config.donorAccountID, 'donorTransactionTable');
 	$("#donateButton").click(function() {
 		createTransaction(5);
-		console.log('donated');
 	});
 	$("#refreshButton").click(function() {
 		updateTable(config.charityAccountID, 'charityTransactionTable');
 		updateTable(config.donorAccountID, 'donorTransactionTable');
-		console.log('refreshed');
 	});
-	alert('readied');
 });

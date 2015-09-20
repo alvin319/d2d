@@ -87,26 +87,6 @@ $(document).ready(function(){
     		});
     	};
 
-      if(isValid) {
-        $.parse.init({
-            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here
-            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here
-        });
-        console.log(email);
-        $.parse.get("Donator", function(json) {
-            results = json.results;
-            var nextDonatorId = results[results.length - 1].donatorId;
-            console.log(nextDonatorId+1);
-            $.parse.post('Donator', {
-              donationId : 1,
-              donatorId : (nextDonatorId + 1),
-              amount : current_amount,
-              email : current_email,
-              isUser : false });
-          });
-
-
-
       	var formatURL = function (path) {
       		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
       	};
@@ -132,10 +112,32 @@ $(document).ready(function(){
               console.log(ajaxOptions);
               console.log(throwError);
       			}
-      		}); };
+      		});
+        };
+
+          if(isValid) {
+            $.parse.init({
+                app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here
+                rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here
+            });
+            console.log(email);
+            $.parse.get("Donator", function(json) {
+                results = json.results;
+                var nextDonatorId = results[results.length - 1].donatorId;
+                console.log(nextDonatorId+1);
+                $.parse.post('Donator', {
+                  donationId : 1,
+                  donatorId : (nextDonatorId + 1),
+                  amount : current_amount,
+                  email : current_email,
+                  isUser : false });
+              });
+
 
           createTransaction(current_amount);
           $(location).attr('href', 'donationsuccess.html');
+    } else {
+      alert("Invalid content! Please enter again.");
     }
 })});
 </script>

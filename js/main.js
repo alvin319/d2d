@@ -180,7 +180,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
         return $scope.items;
       }
     }
-  });};
+  })};
   $scope.updateProgressBar = function() {
     var types = ['danger','warning','info','success'];
     for (project in $scope.projects) {

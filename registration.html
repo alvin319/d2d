@@ -6,6 +6,7 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
+<script src="js/jquery.parse.js"></script>
 
 <div class="panel panel-default">
     <div class="alert alert-danger" id="show_danger" style="display: none">
@@ -70,11 +71,17 @@ $(document).ready(function(){
         isValid = false;
       }
       if(isValid) {
-        console.log(email);
-        console.log(password);
-        console.log(fname);
-        console.log(lname);
-
+        $.parse.init({
+            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here 
+            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here    
+        });
+        $.parse.post('User', { 
+            firstName : fname, 
+            lastName : lname, 
+            emailAddress : email, 
+            password : after_password }, function(json){
+            console.log(json);
+        });
       }
 })});
 </script>

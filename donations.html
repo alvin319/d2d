@@ -50,6 +50,7 @@
     <!-- Angular js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
     <script src="bower_components/angularparse/angularparse.js"></script>
     <script src="js/main.js"></script>
@@ -106,7 +107,7 @@
                           </uib-bar>
                         </uib-progress>
                         <p><a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash</a></p>
-                        <p><button ng-click="openDonate()">Donate</button></p>
+                        <p><button ng-click="openDonate(project.donationId)">Donate</button></p>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">{{project.doctorName}}<i class="material-icons right">close</i></span>
@@ -122,7 +123,7 @@
 
 
 </div><!-- #page -->
-    
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

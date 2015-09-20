@@ -2,7 +2,7 @@ var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap']);
 
 dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $location, $http){
   $scope.projects = [{
-    'amountNeeded': 280,
+    'amountNeeded': 290,
     'amountSofar': 0,
     'location': 'Ashanti, Ghana',
     'money_description':'$280 to equip 1 Community Health Worker with essential medication and supplies. ',

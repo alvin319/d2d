@@ -135,29 +135,29 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
   };
   $scope.getCurrentAmount();
 
-  $scope.openDonate = function (dId) {
-      console.log(dId);
-      $location.url('/donations/'+ dId);
-      // $modal.open({
-      //     templateUrl: 'donate_template.html',
-      //     backdrop: true,
-      //     windowClass: 'modal',
-      //     controller: function ($scope, $modalInstance, $log, $http) {
-      //        $scope.cvc = '';
-      //        $scope.cardNumber = '';
-      //        $scope.Expiry = '';
-      //        $scope.submit = function () {
-      //           $http.post({
-      //             'cvc':'asdf'
-      //           })
-      //           $modalInstance.dismiss('cancel');
-      //        }
-      //        $scope.cancel = function () {
-      //           $modalInstance.dismiss('cancel');
-      //        };
-      //     }
-      // });
-  };
+  // $scope.openDonate = function (dId) {
+  //     console.log(dId);
+  //     $location.url('/donations/'+ dId);
+  //     // $modal.open({
+  //     //     templateUrl: 'donate_template.html',
+  //     //     backdrop: true,
+  //     //     windowClass: 'modal',
+  //     //     controller: function ($scope, $modalInstance, $log, $http) {
+  //     //        $scope.cvc = '';
+  //     //        $scope.cardNumber = '';
+  //     //        $scope.Expiry = '';
+  //     //        $scope.submit = function () {
+  //     //           $http.post({
+  //     //             'cvc':'asdf'
+  //     //           })
+  //     //           $modalInstance.dismiss('cancel');
+  //     //        }
+  //     //        $scope.cancel = function () {
+  //     //           $modalInstance.dismiss('cancel');
+  //     //        };
+  //     //     }
+  //     // });
+  // };
   $scope.open = function () {
     console.log("work");
   var modalInstance = $modal.open({
@@ -177,16 +177,16 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
     }
   };
   $timeout($scope.updateProgressBar, 300);
-}]);
+}])
 
-// .config(function($routeProvider) {
-//   'use strict';
-//   $routeProvider
-//     .when('/donations/:id', {
-//       templateUrl: 'submitDonations.html',
-//       controller: 'mainCtrl'
-//     })
-//     .otherwise({
-//       redirectTo: '/'
-//     });
-// });
+.config(function($routeProvider) {
+  'use strict';
+  $routeProvider
+    .when('/donation/:id', {
+      templateUrl: 'submitDonations.html',
+      controller: 'mainCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});

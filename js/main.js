@@ -1,7 +1,7 @@
-var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse', 'ngRoute']);
+var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse']);
 Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNPvEYQ4WKtWkFA6lFXMyNuNg");
 
-dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
+dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, parsePersistence, parseQuery){
   $scope.id = $routeParams.id;
   console.log($scope.id);
   $scope.projects = [{

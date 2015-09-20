@@ -4,6 +4,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
   $scope.projects = [{
     'amountNeeded': 290,
     'amountSofar': 0,
+    'doctorName': 'Padina Apam',
     'location': 'Ashanti, Ghana',
     'money_description':'$280 to equip 1 Community Health Worker with essential medication and supplies. ',
     'treatment_description': 'Community Health Workers will be equipped with essential medication and supplies enabling them to treat women and children with critical illnesses including malaria, diarrhea, malnutrition, and pneumonia. These items make the difference between leading a productive life or being held back with increasingly serious medical conditions.',
@@ -25,6 +26,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
   },{
     'amountNeeded': 425,
     'amountSofar': 313,
+    'doctorName': 'Dr. Shukri and Dr. Naima',
     'location': 'Hargeisa, Somaliland ',
     'description': 'My name is Dr. Shukri Mohamed Dahir and sitting next to me is Dr. Naima Ahmed Mohamed. We are both doctors: we went to Medical School together and are now working as a &hellip;',
     'focus': 'Birth Injuries Focus',

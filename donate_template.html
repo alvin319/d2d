@@ -99,7 +99,6 @@ $(document).ready(function(){
             rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here
         });
         console.log(email);
-        console.log(amount);
         $.parse.get("Donator", function(json) {
             results = json.results;
             var nextDonatorId = results[results.length - 1].donatorId;
@@ -113,7 +112,10 @@ $(document).ready(function(){
           });
 
       	createTransaction(amount);
+        alert(amount);
         $(location).attr('href', 'donationsuccess.html');
+      } else {
+        alert("Content not valid!");
       }
 })});
 </script>

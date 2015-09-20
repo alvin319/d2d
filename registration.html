@@ -7,50 +7,52 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script src="js/jquery.parse.js"></script>
+<div style="padding-left: 300px; padding-right:300px; padding-top: 50px;">
+  <div style="margin-left: 340px;"><h2>Registration</h2></div>
+</hr>
+  <div class="panel panel-default">
+      <div class="alert alert-danger" id="show_danger" style="display: none">
+          <a href="#" class="close" onclick="$('#show_danger').hide()" aria-label="close">&times;</a>
+        <strong>Invalid Email Or Password Mismatch</strong>
+      </div>
+      <div class="panel-body">
+          <form role="form">
+              <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                      </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                      </div>
+                  </div>
+              </div>
 
-<div class="panel panel-default">
-    <div class="alert alert-danger" id="show_danger" style="display: none">
-        <a href="#" class="close" onclick="$('#show_danger').hide()" aria-label="close">&times;</a>
-      <strong>Invalid Email Or Password Mismatch</strong>
-    </div>
-    <div class="panel-body">
-        <form role="form">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                    </div>
-                </div>
-            </div>
+              <div class="form-group">
+                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+              </div>
 
-            <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
-            </div>
+              <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                      </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                      </div>
+                  </div>
+              </div>
 
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
-                    </div>
-                </div>
-            </div>
-
-            <input type="submit" id="register_submit" value="Register" class="btn btn-info btn-block">
-        </form>
-    </div>
+              <input type="submit" id="register_submit" value="Register" class="btn btn-info btn-block">
+          </form>
+      </div>
+  </div>
+  </div>
 </div>
-</div>
-
 <script>
 $(document).ready(function(){
     $("#register_submit").click(function(e) {
@@ -72,8 +74,8 @@ $(document).ready(function(){
       }
       if(isValid) {
         $.parse.init({
-            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here 
-            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here    
+            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here
+            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here
         });
 
         $.parse.get("Donator", function(json) {
@@ -84,8 +86,8 @@ $(document).ready(function(){
                     update_objectId = results[i].objectId;
                 }
             }
-            $.parse.put(('Donator/'+update_objectId), { 
-                firstName : fname, 
+            $.parse.put(('Donator/'+update_objectId), {
+                firstName : fname,
                 lastName : lname,
                 isUser : true,
                 password : after_password

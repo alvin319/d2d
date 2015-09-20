@@ -158,27 +158,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                    // $location.url('./donations/'+ dId);
                    $modal.open({
                      // templateUrl: 'submitDonation.html',
-<<<<<<< HEAD
                        templateUrl: 'donate_template.html'
-=======
-                       templateUrl: 'donate_template.html',
-                       backdrop: true,
-                       windowClass: 'modal',
-                       controller: function ($scope, $modalInstance, $log, $http) {
-                          $scope.cvc = '';
-                          $scope.cardNumber = '';
-                          $scope.Expiry = '';
-                          $scope.submit = function () {
-                             $http.post({
-                               'cvc':'asdf'
-                             })
-                             $modalInstance.dismiss('cancel');
-                          }
-                          $scope.cancel = function () {
-                             $modalInstance.dismiss('cancel');
-                          };
-                       }
->>>>>>> 6d1e5dcc695d81e73d586d9c17884944d60db509
                    });
                };
              // $scope.cancel = function () {

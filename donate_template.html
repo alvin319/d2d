@@ -56,38 +56,6 @@ $(document).ready(function(){
       var current_amount = Number($("#amount").val());
       var isValid = true;
     	var config = capitalOneConfig;
-    	var formatURL = function (path) {
-    		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
-    	};
-    	var createTransaction = function (donation) {
-
-    		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
-    		var postData = {
-    			medium: 'balance',
-    			payee_id : config.charityAccountID,
-    			// transaction_date : new Date().toDateString(),
-    			description : "Donation to fund X's surgery",
-    			amount : donation
-    		};
-    		$.ajax({
-    			url: URL,
-    			type: 'POST',
-    			data: JSON.stringify(postData),
-    			dataType: 'json',
-    			contentType: "application/json; charset=utf-8",
-    			success : function (data, textStatus) {
-    				console.log(data);
-    				console.log(textStatus);
-    			},
-    			error : function (xhr, ajaxOptions, throwError) {
-    				console.log(xhr);
-    				console.log(ajaxOptions);
-    				console.log(throwError);
-    			}
-    		});
-    	};
-
-
 
       if(isValid) {
         $.parse.init({
@@ -107,10 +75,32 @@ $(document).ready(function(){
               isUser : false });
           });
 
-      	createTransaction(current_amount);
+        createTransaction(current_amount);
+
+      	var formatURL = function (path) {
+      		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
+      	};
+      	var createTransaction = function (donation) {
+      		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
+      		var postData = {
+      			medium: 'balance',
+      			payee_id : config.charityAccountID,
+      			// transaction_date : new Date().toDateString(),
+      			description : "Donation to fund X's surgery",
+      			amount : donation
+      		};
+      		$.ajax({
+      			url: URL,
+      			type: 'POST',
+      			data: JSON.stringify(postData),
+      			dataType: 'json',
+      			contentType: "application/json; charset=utf-8",
+      			success : function (data, textStatus) {
+      			},
+      			error : function (xhr, ajaxOptions, throwError) {
+      			}
+      		}); };
         setTimeOut(function() {$(location).attr('href', 'donationsuccess.html');}, 5000);
-      } else {
-        alert("Content not valid!");
-      }
+    }
 })});
 </script>

@@ -1,9 +1,11 @@
-var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap']);
+var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse']);
+Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNPvEYQ4WKtWkFA6lFXMyNuNg");
 
-dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($scope, $location, $http, $modal){
+dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, parsePersistence, parseQuery){
   $scope.projects = [{
-    'amountNeeded': 290,
-    'amountSofar': 0,
+    'donationId': 1,
+    'amountNeeded': 150,
+    'amountSofar': 100,
     'doctorName': 'Padina Apam',
     'location': 'Ashanti, Ghana',
     'imgLocation': 'img/padina-screen.jpg',
@@ -22,11 +24,12 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($
     ],
     'cashtag': 'fear',
     'type': 'success',
-    'value': '40',
+    'value': 40,
     'breakdown_txt': '71%: Essential medical and logistical supplies including e.g. soap, stationery (counseling cards and job aids), a thermometer, respiratory timer, water jugs and a backpack. 29%: Critical medication including medicines to treat diarrhea, malaria, pneumonia, malnutrition and care for pregnant mothers.'
   },{
-    'amountNeeded': 425,
-    'amountSofar': 313,
+    'donationId': 2,
+    'amountNeeded': 1,
+    'amountSofar': 1,
     'doctorName': 'Dr. Shukri and Dr. Naima',
     'location': 'Hargeisa, Somaliland ',
     'imgLocation': 'img/doctor-shukri.png',
@@ -35,7 +38,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($
     'treatment_description': 'Our focus is on providing safe births and caesarean sections for mothers. In Somaliland most mothers do not receive prenatal care. As a result, they often have unknown problems such as anemia, diabetes or hypertension that go untreated. Sometimes more serious issues develop, such as obstructed labor; in these cases, we do a surgical procedure known as a caesarian section, which involves making an incision through the mother\'s abdomen to deliver the baby.',
     'cashtag': 'fear',
     'type': 'success',
-    'value': '50',
+    'value': 50,
     'breakdown_txt':'Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
     'breakdown': [{
         'value': 47,
@@ -57,15 +60,27 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($
   }
   ];
 
-  $scope.updateProgressBar = function() {
-    var types = ['danger','warning','info','success'];
-    for (project in $scope.projects) {
-      $scope.projects[project].value = Math.floor($scope.projects[project].amountSofar / $scope.projects[project].amountNeeded * 100);
-      $scope.projects[project].type = types[Math.floor($scope.projects[project].value/25)];
-    }
-  };
-  $scope.updateProgressBar();
+  $scope.getCurrentAmount = function() {
+    var query = parseQuery.new('Donation');
 
+    parseQuery.find(query)
+    .then(function(results) {
+      for(var i = 0; i < results.length; i++) {
+        for(project in $scope.projects) {
+          if(project == (results[i].attributes.donationId - 1)) {
+            console.log("id: " + project);
+            console.log("before sofar: " + $scope.projects[project].amountSofar);
+            console.log("before needed: " + $scope.projects[project].amountNeeded);
+            $scope.projects[project].amountSofar = results[i].attributes.currentAmount;
+            $scope.projects[project].amountNeeded = results[i].attributes.expectedAmount;
+            console.log("after sofar: " + $scope.projects[project].amountSofar);
+            console.log("after needed: " + $scope.projects[project].amountNeeded);
+          }
+        }
+      }
+    });
+  };
+  $scope.getCurrentAmount();
 
   $scope.openDonate = function () {
         $modal.open({
@@ -99,4 +114,12 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($
       }
     }
   })};
+  $scope.updateProgressBar = function() {
+    var types = ['danger','warning','info','success'];
+    for (project in $scope.projects) {
+      $scope.projects[project].value = Math.floor($scope.projects[project].amountSofar / $scope.projects[project].amountNeeded * 100);
+      $scope.projects[project].type = types[Math.floor($scope.projects[project].value/25)];
+    }
+  };
+  $timeout($scope.updateProgressBar, 300);
 }]);

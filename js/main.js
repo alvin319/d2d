@@ -143,9 +143,9 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
           backdrop: true,
           windowClass: 'modal',
           controller: function ($scope, $modalInstance, $log, $http) {
-             $scope.cvc = '';
-             $scope.cardNumber = '';
-             $scope.Expiry = '';
+             // $scope.cvc = '';
+             // $scope.cardNumber = '';
+             // $scope.Expiry = '';
 
              $scope.openC1 = function () {
                    console.log('open capital one');
@@ -154,19 +154,12 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                      // templateUrl: 'submitDonation.html',
                        templateUrl: 'donate_template.html',
                        backdrop: true,
-                       windowClass: 'modal',
-                       controller: function ($scope, $modalInstance) {
-                          $scope.cancel = function () {
-                              if(confirm("Are you sure to leave this page?")) {
-                             $modalInstance.dismiss('cancel');
-                            }
-                          };
-                       }
+                       windowClass: 'modal'
                    });
                };
-             $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-             };
+             // $scope.cancel = function () {
+             //    $modalInstance.dismiss('cancel');
+             // };
           }
       });
   };

@@ -41,7 +41,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
     'cashtag': 'fear',
     'type': 'success',
     'value': 50,
-    'breakdown_txt':'Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
+    'breakdown_txt':'Birth Attendant Training - 47%, Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
     'breakdown': [{
         'value': 47,
         'type': 'info'

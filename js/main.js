@@ -3,7 +3,6 @@ Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNP
 
 dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
   $scope.id = $routeParams.id;
-  console.log($scope.id);
   $scope.projects = [{
     'donationId': 1,
     'amountNeeded': 150,
@@ -160,12 +159,6 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                           $scope.cvc = '';
                           $scope.cardNumber = '';
                           $scope.Expiry = '';
-                          $scope.submit = function () {
-                             $http.post({
-                               'cvc':'asdf'
-                             })
-                             $modalInstance.dismiss('cancel');
-                          }
                           $scope.cancel = function () {
                              $modalInstance.dismiss('cancel');
                           };
@@ -189,7 +182,6 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
 
 
   $scope.open = function () {
-    console.log("work");
   var modalInstance = $modal.open({
     animation: $scope.animationsEnabled,
     templateUrl: 'registration.html',

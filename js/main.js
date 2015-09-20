@@ -1,7 +1,7 @@
-var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse']);
+var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse', 'ngRoute']);
 Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNPvEYQ4WKtWkFA6lFXMyNuNg");
 
-dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, parsePersistence, parseQuery){
+dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
   $scope.id = $routeParams.id;
   console.log($scope.id);
   $scope.projects = [{
@@ -180,8 +180,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
         return $scope.items;
       }
     }
-  });
-};
+  });};
   $scope.updateProgressBar = function() {
     var types = ['danger','warning','info','success'];
     for (project in $scope.projects) {

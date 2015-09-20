@@ -75,7 +75,7 @@ $(document).ready(function(){
               isUser : false });
           });
 
-        createTransaction(current_amount);
+        
 
       	var formatURL = function (path) {
       		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
@@ -98,9 +98,14 @@ $(document).ready(function(){
       			success : function (data, textStatus) {
       			},
       			error : function (xhr, ajaxOptions, throwError) {
+              console.log(xhr);
+              console.log(ajaxOptions);
+              console.log(throwError);
       			}
       		}); };
-        setTimeOut(function() {$(location).attr('href', 'donationsuccess.html');}, 5000);
+
+          createTransaction(current_amount);
+          $(location).attr('href', 'donationsuccess.html');
     }
 })});
 </script>

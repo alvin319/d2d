@@ -1,6 +1,6 @@
 var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap']);
 
-dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $location, $http){
+dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($scope, $location, $http, $modal){
   $scope.projects = [{
     'amountNeeded': 290,
     'amountSofar': 0,
@@ -61,4 +61,26 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
     }
   };
   $scope.updateProgressBar();
+
+  $scope.open = function () {
+        $modal.open({
+            templateUrl: 'donate_template.html',
+            backdrop: true,
+            windowClass: 'modal',
+            controller: function ($scope, $modalInstance, $log, $http) {
+               $scope.cvc = '';
+               $scope.cardNumber = '';
+               $scope.Expiry = '';
+               $scope.submit = function () {
+                  $http.post({
+                    'cvc':'asdf'
+                  })
+                  $modalInstance.dismiss('cancel');
+               }
+               $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+               };
+            }
+        });
+    };
 }]);

@@ -71,31 +71,46 @@
          <!-- /.container-fluid -->
      </nav>
 
-     <header>
-         <div class="header-content">
-             <div class="header-content-inner">
-                 <h1>Donation Made Easy</h1>
-                 <hr>
-                 <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-                 <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+     <div class="container">
+         <div class="row">
+             <form role="form">
+                 <div class="col-lg-6">
+                     <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                     <div class="form-group">
+                         <label for="InputEmail">Enter Email</label>
+                         <div class="input-group">
+                             <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Enter Email" required>
+                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="InputMessage">Debit/Credit Card Number</label>
+                         <div class="input-group">
+                             <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="InputMessage">Debit/Credit Card Number</label>
+                         <div class="input-group">
+                             <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                         </div>
+                     </div>
+                     <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                 </div>
+             </form>
+             <div class="col-lg-5 col-md-push-1">
+                 <div class="col-md-12">
+                     <div class="alert alert-success">
+                         <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
+                     </div>
+                     <div class="alert alert-danger">
+                         <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
+                     </div>
+                 </div>
              </div>
          </div>
-     </header>
-
-     <div>
-       <ul>
-         <li ng-repeat="project in projects">
-           <small><em>Object (changes type based on value)</em></small>
-           <progressbar class="progress-striped active" value="project.value" type="{{project.type}}"></progressbar>
-           <p>{{project.amount}}</p>
-           <p>{{project.location}}</p>
-           <p>{{project.treatment_description}}</p>
-           <p>{{project.focus}}</p>
-           <p>{{project.breakdown}}</p>
-           <p></p>
-           <a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash!</a>
-         </li>
-       </ul>
      </div>
 
      <!-- jQuery -->

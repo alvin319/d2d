@@ -1,4 +1,8 @@
-# d2d
+# Down to Donate (d2d)
+Make donation easier than ever.
+
+# Team Members
+Alvin Deng, Raymond Chee, Michael Li, Sophia Liu
 
 ## Credits
 

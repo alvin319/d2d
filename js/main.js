@@ -188,7 +188,6 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
 
 
   $scope.open = function () {
-    console.log("work");
   var modalInstance = $modal.open({
     animation: $scope.animationsEnabled,
     templateUrl: 'registration.html',

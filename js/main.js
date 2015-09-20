@@ -20,18 +20,36 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
     ],
     'cashtag': 'fear',
     'type': 'success',
-    'value': '40'
+    'value': '40',
+    'breakdown_txt': '71%: Essential medical and logistical supplies including e.g. soap, stationery (counseling cards and job aids), a thermometer, respiratory timer, water jugs and a backpack. 29%: Critical medication including medicines to treat diarrhea, malaria, pneumonia, malnutrition and care for pregnant mothers.'
   },{
     'amountNeeded': 425,
     'amountSofar': 313,
     'location': 'Hargeisa, Somaliland ',
     'description': 'My name is Dr. Shukri Mohamed Dahir and sitting next to me is Dr. Naima Ahmed Mohamed. We are both doctors: we went to Medical School together and are now working as a &hellip;',
     'focus': 'Birth Injuries Focus',
-    'breakdown':'$425 per treatment 47%: Operation. 19%: Medication &amp; dressings. 19%: Hospital stay (8 days). 9%: Lab tests, screening, grouping &amp; X-matching. 6%: Anesthesia.',
     'treatment_description': 'Our focus is on providing safe births and caesarean sections for mothers. In Somaliland most mothers do not receive prenatal care. As a result, they often have unknown problems such as anemia, diabetes or hypertension that go untreated. Sometimes more serious issues develop, such as obstructed labor; in these cases, we do a surgical procedure known as a caesarian section, which involves making an incision through the mother\'s abdomen to deliver the baby.',
     'cashtag': 'fear',
     'type': 'success',
-    'value': '50'
+    'value': '50',
+    'breakdown_txt':'Operation. 19%: Medication &amp; dressings. 19%: Hospital stay (8 days). 9%: Lab tests, screening, grouping &amp; X-matching. 6%: Anesthesia.',
+    'breakdown': [{
+        'value': 47,
+        'type': 'info'
+      }, {
+        'value': 19,
+        'type': 'danger'
+      }, {
+        'value': 19,
+        'type': 'warning'
+      }, {
+        'value': 9,
+        'type': 'success'
+      }, {
+        'value': 6,
+        'type': 'info'
+      }
+    ]
   }
   ];
 

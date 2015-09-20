@@ -1,6 +1,8 @@
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <script src="js/jquery.parse.js"></script>
+<script src="js/capitalOneConfig.js"></script>
+<script src="js/main.js"></script>
 
 <!-- <div class="alert alert-danger" id="show_danger" style="display: none">
     <a href="#" class="close" onclick="$('#show_danger').hide()" aria-label="close">&times;</a>
@@ -48,17 +50,53 @@ $(document).ready(function(){
     $("#submit").click(function(e) {
         e.preventDefault();
       var current_email = $("#email").val();
-      var current_amount = Number($("#amount").val());  
+      var current_amount = Number($("#amount").val());
       var isValid = true;
       // var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
       // if(!pattern.test(email)){
       //   $("#show_danger").show("fast");
       //   isValid = false;
       // }
+
+
+      	var config = capitalOneConfig;
+      	function formatURL(path) {
+      		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
+      	}
+      	function createTransaction(donation) {
+
+      		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
+      		var postData = {
+      			medium: 'balance',
+      			payee_id : config.charityAccountID,
+      			// transaction_date : new Date().toDateString(),
+      			description : "Donation to fund X's surgery",
+      			amount : donation
+      		};
+      		$.ajax({
+      			url: URL,
+      			type: 'POST',
+      			data: JSON.stringify(postData),
+      			dataType: 'json',
+      			contentType: "application/json; charset=utf-8",
+      			success : function (data, textStatus) {
+      				console.log(data);
+      				console.log(textStatus);
+      			},
+      			error : function (xhr, ajaxOptions, throwError) {
+      				console.log(xhr);
+      				console.log(ajaxOptions);
+      				console.log(throwError);
+      			}
+      		});
+      	}
+
+
+
       if(isValid) {
         $.parse.init({
-            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here 
-            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here    
+            app_id : "wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", // <-- enter your Application Id here
+            rest_key : "WdbR9mMUOyxzLEpTPCByMS2RGp7b7us46AfgrQw1" // <--enter your REST API Key here
         });
         console.log(email);
         console.log(amount);
@@ -73,6 +111,9 @@ $(document).ready(function(){
               email : current_email,
               isUser : false });
           });
+
+      	createTransaction(amount);
+        $(location).attr('href', 'donationsuccess.html');
       }
 })});
 </script>

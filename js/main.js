@@ -2,8 +2,8 @@ var dtd = angular.module('d2d', ['ngAnimate', 'ui.bootstrap', 'angularParse', 'n
 Parse.initialize("wUqVebZ3FMEK8HkKFNK2fhkN3FCRv8nn5ppC2JmC", "n73GPslnRXa9oQ7tNPvEYQ4WKtWkFA6lFXMyNuNg");
 
 dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout', '$route', '$routeParams', 'parsePersistence', 'parseQuery', function($scope, $location, $http, $modal, $timeout, $route, $routeParams, parsePersistence, parseQuery){
-  // $scope.id = $routeParams.id;
-  // console.log($scope.id);
+  $scope.id = $routeParams.id;
+  console.log($scope.id);
   $scope.projects = [{
     'donationId': 1,
     'amountNeeded': 150,
@@ -135,29 +135,59 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
   };
   $scope.getCurrentAmount();
 
-  // $scope.openDonate = function (dId) {
-  //     console.log(dId);
-  //     $location.url('/donations/'+ dId);
-  //     // $modal.open({
-  //     //     templateUrl: 'donate_template.html',
-  //     //     backdrop: true,
-  //     //     windowClass: 'modal',
-  //     //     controller: function ($scope, $modalInstance, $log, $http) {
-  //     //        $scope.cvc = '';
-  //     //        $scope.cardNumber = '';
-  //     //        $scope.Expiry = '';
-  //     //        $scope.submit = function () {
-  //     //           $http.post({
-  //     //             'cvc':'asdf'
-  //     //           })
-  //     //           $modalInstance.dismiss('cancel');
-  //     //        }
-  //     //        $scope.cancel = function () {
-  //     //           $modalInstance.dismiss('cancel');
-  //     //        };
-  //     //     }
-  //     // });
-  // };
+  $scope.openDonate = function (dId) {
+      // console.log(dId);
+      // $location.url('./donations/'+ dId);
+      $modal.open({
+        templateUrl: 'submitDonation.html',
+          // templateUrl: 'donate_template.html',
+          backdrop: true,
+          windowClass: 'modal',
+          controller: function ($scope, $modalInstance, $log, $http) {
+             $scope.cvc = '';
+             $scope.cardNumber = '';
+             $scope.Expiry = '';
+
+             $scope.openC1 = function () {
+                   console.log('open capital one');
+                   // $location.url('./donations/'+ dId);
+                   $modal.open({
+                     // templateUrl: 'submitDonation.html',
+                       templateUrl: 'donate_template.html',
+                       backdrop: true,
+                       windowClass: 'modal',
+                       controller: function ($scope, $modalInstance, $log, $http) {
+                          $scope.cvc = '';
+                          $scope.cardNumber = '';
+                          $scope.Expiry = '';
+                          $scope.submit = function () {
+                             $http.post({
+                               'cvc':'asdf'
+                             })
+                             $modalInstance.dismiss('cancel');
+                          }
+                          $scope.cancel = function () {
+                             $modalInstance.dismiss('cancel');
+                          };
+                       }
+                   });
+               };
+
+             $scope.submit = function () {
+                $http.post({
+                  'cvc':'asdf'
+                })
+                $modalInstance.dismiss('cancel');
+             }
+             $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+             };
+          }
+      });
+  };
+
+
+
   $scope.open = function () {
     console.log("work");
   var modalInstance = $modal.open({
@@ -178,15 +208,3 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
   };
   $timeout($scope.updateProgressBar, 300);
 }])
-
-.config(function($routeProvider) {
-  'use strict';
-  $routeProvider
-    .when('/donation/:id', {
-      templateUrl: 'submitDonations.html',
-      controller: 'mainCtrl'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
-});

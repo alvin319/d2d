@@ -107,7 +107,8 @@
                           </uib-bar>
                         </uib-progress>
                         <p><a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash</a></p>
-                        <p><a ng-href="./donation/{{project.donationId}}" >Donate</a></p>
+                        <p><button ng-click="openDonate(project.donationId)">Donate</button></p>
+                        <!-- <p><a ng-href="./donation/{{project.donationId}}" >Donate</a></p> -->
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">{{project.doctorName}}<i class="material-icons right">close</i></span>

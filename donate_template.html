@@ -49,48 +49,41 @@
 <script>
 $(document).ready(function(){
     $("#submit").click(function(e) {
-        e.preventDefault();
+      e.preventDefault();
       var current_email = $("#email").val();
       var current_amount = Number($("#amount").val());
       var isValid = true;
-      // var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
-      // if(!pattern.test(email)){
-      //   $("#show_danger").show("fast");
-      //   isValid = false;
-      // }
+    	var config = capitalOneConfig;
+    	var formatURL = function (path) {
+    		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
+    	};
+    	var createTransaction = function (donation) {
 
-
-      	var config = capitalOneConfig;
-      	function formatURL(path) {
-      		return 'http://api.reimaginebanking.com/' + path + '?key=' + config.apiKey;
-      	}
-      	function createTransaction(donation) {
-
-      		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
-      		var postData = {
-      			medium: 'balance',
-      			payee_id : config.charityAccountID,
-      			// transaction_date : new Date().toDateString(),
-      			description : "Donation to fund X's surgery",
-      			amount : donation
-      		};
-      		$.ajax({
-      			url: URL,
-      			type: 'POST',
-      			data: JSON.stringify(postData),
-      			dataType: 'json',
-      			contentType: "application/json; charset=utf-8",
-      			success : function (data, textStatus) {
-      				console.log(data);
-      				console.log(textStatus);
-      			},
-      			error : function (xhr, ajaxOptions, throwError) {
-      				console.log(xhr);
-      				console.log(ajaxOptions);
-      				console.log(throwError);
-      			}
-      		});
-      	}
+    		var URL = formatURL('accounts/' + config.donorAccountID + '/transfers');
+    		var postData = {
+    			medium: 'balance',
+    			payee_id : config.charityAccountID,
+    			// transaction_date : new Date().toDateString(),
+    			description : "Donation to fund X's surgery",
+    			amount : donation
+    		};
+    		$.ajax({
+    			url: URL,
+    			type: 'POST',
+    			data: JSON.stringify(postData),
+    			dataType: 'json',
+    			contentType: "application/json; charset=utf-8",
+    			success : function (data, textStatus) {
+    				console.log(data);
+    				console.log(textStatus);
+    			},
+    			error : function (xhr, ajaxOptions, throwError) {
+    				console.log(xhr);
+    				console.log(ajaxOptions);
+    				console.log(throwError);
+    			}
+    		});
+    	};
 
 
 

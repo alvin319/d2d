@@ -24,6 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <!-- <link rel="stylesheet" href="css/organizer.css" type="text/css"> -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -82,42 +83,31 @@
     </nav>
     <br><br><br><br>
     <div class="container" ng-app="d2d" ng-controller="mainCtrl">
-        <div class="row">
-            <div class="col s12 m6" ng-repeat="project in projects">
-                <div class="card large">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="{{project.imgLocation}}">
-                        <span class="card-title">
-                          ${{project.amountNeeded}} more needed
-                          <p>for {{project.focus}}</p>
-                        <p>{{project.location}}</p>
-                        <progressbar class="progress-striped active" value="project.value" type="{{project.type}}" style="height: 15px;"></progressbar>
-                        </span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
-                        <button popover="{{project.breakdown_txt}}" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-default">Breakdown</button>
-                        <uib-progress style="height: 18px;">
-                          <uib-bar ng-repeat="bar in project.breakdown track by $index"value="bar.value" type="{{bar.type}}">
-                               <span tooltip="hh" ng-hide="bar.value < 5">{{bar.value}}%</span>
-                          </uib-bar>
-                        </uib-progress>
-                        <p><a ng-href="https://cash.me/${{project.cashtag}}">Donate through Square Cash</a></p>
-                        <p><button ng-click="openDonate()">Donate</button></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">{{project.doctorName}}<i class="material-icons right">close</i></span>
-                        <p><br>{{project.treatment_description}}</p>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="row" id="projectDetails" style="padding-left: 30px">
+                <h2>{{projects[0].focus}}</h2>
+                ${{projects[0].amountNeeded}} more needed
+            </div>
 
+            <div class="row" id="location">
+                <span class="card-title">
+                    <p>{{projects[0].location}}</p>
+                </span>
+            </div> 
 
+            <div class="card-content">
+                <uib-progress style="height: 18px;">
+                    <uib-bar ng-repeat="bar in projects[0].breakdown track by $index"value="bar.value" type="{{bar.type}}">
+                        <span tooltip="hh" ng-hide="bar.value < 5">{{bar.value}}%</span>
+                    </uib-bar>
+                </uib-progress>
+            </div>
+            <h3>Breakdown</h3>
+            <div id="pie_chart" style="width: 500px; height: 500px; margin: 0 auto;">
 
             </div>
         </div>
     </div>
-
-
 </div><!-- #page -->
 
 

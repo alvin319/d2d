@@ -108,7 +108,7 @@ $(document).ready(function(){
           });
 
       	createTransaction(current_amount);
-        $(location).attr('href', 'donationsuccess.html');
+        setTimeOut(function() {$(location).attr('href', 'donationsuccess.html');}, 5000);
       } else {
         alert("Content not valid!");
       }

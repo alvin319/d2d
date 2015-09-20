@@ -159,12 +159,6 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                           $scope.cvc = '';
                           $scope.cardNumber = '';
                           $scope.Expiry = '';
-                          $scope.submit = function () {
-                             $http.post({
-                               'cvc':'asdf'
-                             })
-                             $modalInstance.dismiss('cancel');
-                          }
                           $scope.cancel = function () {
                              $modalInstance.dismiss('cancel');
                           };

@@ -155,23 +155,15 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', '$timeout'
                        templateUrl: 'donate_template.html',
                        backdrop: true,
                        windowClass: 'modal',
-                       controller: function ($scope, $modalInstance, $log, $http) {
-                          $scope.cvc = '';
-                          $scope.cardNumber = '';
-                          $scope.Expiry = '';
+                       controller: function ($scope, $modalInstance) {
                           $scope.cancel = function () {
+                              if(confirm("Are you sure to leave this page?")) {
                              $modalInstance.dismiss('cancel');
+                            }
                           };
                        }
                    });
                };
-
-             $scope.submit = function () {
-                $http.post({
-                  'cvc':'asdf'
-                })
-                $modalInstance.dismiss('cancel');
-             }
              $scope.cancel = function () {
                 $modalInstance.dismiss('cancel');
              };

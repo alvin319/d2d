@@ -6,6 +6,7 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
     'amountSofar': 0,
     'doctorName': 'Padina Apam',
     'location': 'Ashanti, Ghana',
+    'imgLocation': 'img/padina-screen.jpg',
     'money_description':'$280 to equip 1 Community Health Worker with essential medication and supplies. ',
     'treatment_description': 'Community Health Workers will be equipped with essential medication and supplies enabling them to treat women and children with critical illnesses including malaria, diarrhea, malnutrition, and pneumonia. These items make the difference between leading a productive life or being held back with increasingly serious medical conditions.',
     'focus': 'Health Kits Focus',
@@ -28,13 +29,14 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', function($scope, $lo
     'amountSofar': 313,
     'doctorName': 'Dr. Shukri and Dr. Naima',
     'location': 'Hargeisa, Somaliland ',
+    'imgLocation': 'img/doctor-shukri.png',
     'description': 'My name is Dr. Shukri Mohamed Dahir and sitting next to me is Dr. Naima Ahmed Mohamed. We are both doctors: we went to Medical School together and are now working as a &hellip;',
     'focus': 'Birth Injuries Focus',
     'treatment_description': 'Our focus is on providing safe births and caesarean sections for mothers. In Somaliland most mothers do not receive prenatal care. As a result, they often have unknown problems such as anemia, diabetes or hypertension that go untreated. Sometimes more serious issues develop, such as obstructed labor; in these cases, we do a surgical procedure known as a caesarian section, which involves making an incision through the mother\'s abdomen to deliver the baby.',
     'cashtag': 'fear',
     'type': 'success',
     'value': '50',
-    'breakdown_txt':'Operation. 19%: Medication &amp; dressings. 19%: Hospital stay (8 days). 9%: Lab tests, screening, grouping &amp; X-matching. 6%: Anesthesia.',
+    'breakdown_txt':'Operation - 19%, Medication,dressings - 19%, Hospital stay (8 days) - 9%, Lab tests, screening, grouping - 6%',
     'breakdown': [{
         'value': 47,
         'type': 'info'

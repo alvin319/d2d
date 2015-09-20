@@ -60,8 +60,8 @@ dtd.controller("mainCtrl", ['$scope', '$location', '$http', '$modal', function($
   $scope.updateProgressBar = function() {
     var types = ['danger','warning','info','success'];
     for (project in $scope.projects) {
-      project.value = Math.floor(project.amountSofar / project.amountNeeded * 100);
-      project.type = types[Math.floor(project.value/25)];
+      $scope.projects[project].value = Math.floor($scope.projects[project].amountSofar / $scope.projects[project].amountNeeded * 100);
+      $scope.projects[project].type = types[Math.floor($scope.projects[project].value/25)];
     }
   };
   $scope.updateProgressBar();

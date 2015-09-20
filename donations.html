@@ -44,6 +44,8 @@
 
     <!-- Angular js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -99,16 +101,28 @@
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="img/padina-screen.jpg">
                         <span class="card-title">
-                        {{project.amount}}
+                          ${{project.amountNeeded}} more needed
                         <p>{{project.location}}</p>
+                        <progressbar class="progress-striped active" value="project.value" type="{{project.type}}" style="height: 15px;"></progressbar>
                         </span>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
                         <p><a href="#">Donation Link</a></p>
+                        <uib-progress style="height: 18px;">
+                          <uib-bar ng-repeat="bar in project.breakdown" value="bar.value" type="{{bar.type}}">
+                            <span ng-hide="bar.value < 5">{{bar.value}}%</span>
+                          </uib-bar>
+                        </uib-progress>
+                        <ul>
+                          <li ng-repeat="bar in project.breakdown">
+                            {{bar.value}}%: {{bar.description}}
+                          </li>
+                        </ul>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Doctor Name<i class="material-icons right">close</i></span>
+                        <progressbar class="progress-striped active" value="project.value" type="{{project.type}}"></progressbar>
                         <p><br>{{project.treatment_description}}</p>
                     </div>
                 </div>
@@ -116,7 +130,7 @@
         </div>
     </div>
 
-    
+
 </div><!-- #page -->
 
     <!-- Bootstrap Core JavaScript -->
@@ -126,7 +140,6 @@
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/jquery.fittext.js"></script>
     <script src="js/wow.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
 

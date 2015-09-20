@@ -5,11 +5,11 @@
   "ignore": [],
   "dependencies": {
     "angular": "1.4.x",
+    "angular-bootstrap": "0.13.4",
     "angular-mocks": "1.4.x",
-    "jquery": "~2.1.1",
-    "bootstrap": "~3.1.1",
     "angular-route": "~1.4.0",
-    "angular-bootstrap":"0.13.4"
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1"
   },
   "homepage": "https://github.com/angular/bower-angular",
   "_release": "1.4.6",
